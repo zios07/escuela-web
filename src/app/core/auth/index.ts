@@ -49,14 +49,14 @@ export {
 
 // EFFECTS
 export { AuthEffects } from './_effects/auth.effects';
-export { PermissionEffects } from './_effects/permission.effects';
-export { RoleEffects } from './_effects/role.effects';
+// export { PermissionEffects } from './_effects/permission.effects';
+// export { RoleEffects } from './_effects/role.effects';
 export { UserEffects } from './_effects/user.effects';
 
 // REDUCERS
 export { authReducer } from './_reducers/auth.reducers';
-export { permissionsReducer } from './_reducers/permission.reducers';
-export { rolesReducer } from './_reducers/role.reducers';
+// export { permissionsReducer } from './_reducers/permission.reducers';
+// export { rolesReducer } from './_reducers/role.reducers';
 export { usersReducer } from './_reducers/user.reducers';
 
 // SELECTORS
@@ -103,8 +103,11 @@ export {
 export { AuthGuard } from './_guards/auth.guard';
 export { ModuleGuard } from './_guards/module.guard';
 
+
 // MODELS
 export { User } from './_models/user.model';
+export { UserAuth } from './_models/user';
+export { Account } from './_models/account';
 export { Permission } from './_models/permission.model';
 export { Role } from './_models/role.model';
 export { Address } from './_models/address.model';

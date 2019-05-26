@@ -41,7 +41,7 @@ import { LayoutConfigService, LayoutRefService, MenuAsideService, MenuConfigServ
 	KtDialogService } from './core/_base/layout';
 // Auth
 import { AuthModule } from './views/pages/auth/auth.module';
-import { AuthService, PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from './core/auth';
+import { AuthService } from './core/auth';
 // CRUD
 import { HttpUtilsService, LayoutUtilsService, TypesUtilsService } from './core/_base/crud';
 // Config
