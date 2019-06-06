@@ -4,39 +4,19 @@
     <span>HOME</span>
   </a>
 
-  <mat-menu #list="matMenu">
-    <a mat-menu-item routerLink="food">
-      <mat-icon>fastfood</mat-icon>
-      <span>Food list</span>
-    </a>
-    <a mat-menu-item routerLink="exercise">
-      <mat-icon>directions_run</mat-icon>
-      <span>Exercise list</span>
-    </a>
-  </mat-menu>
-  <button mat-icon-button [matMenuTriggerFor]="list" class="nav-item">
-    <mat-icon>list</mat-icon>&nbsp;
-    <span>LISTS</span>
+  <button mat-icon-button class="nav-item" routerLink="courses">
+    <!-- <mat-icon>list</mat-icon>&nbsp; -->
+    <span>Mes cours</span>
   </button>
 
-  <mat-menu #tracker="matMenu">
-    <a mat-menu-item routerLink="food/tracker">
-      <mat-icon>kitchen</mat-icon>
-      <span>Food tracker</span>
-    </a>
-    <a mat-menu-item routerLink="exercise/tracker">
-      <mat-icon>fitness_center</mat-icon>
-      <span>Exercise tracker</span>
-    </a>
-  </mat-menu>
-  <button mat-icon-button [matMenuTriggerFor]="tracker" class="nav-item">
-    <mat-icon>event</mat-icon>&nbsp;
-    <span>TRACKERS</span>
+  <button mat-icon-button class="nav-item" routerLink="activities">
+    <!-- <mat-icon>event</mat-icon>&nbsp; -->
+    <span>Activites</span>
   </button>
 
-  <button mat-icon-button class="nav-item nav-reports" routerLink="reports">
-    <mat-icon>assessment</mat-icon>&nbsp;
-    <span>REPORTS</span>
+  <button mat-icon-button class="nav-item" routerLink="recompences">
+    <!-- <mat-icon>assessment</mat-icon>&nbsp; -->
+    <span>Recompences</span>
   </button>
 
   <span class="fill-remaining-space"></span>
@@ -46,9 +26,13 @@
   </button>
 
   <mat-menu #menuList="matMenu">
-    <a mat-menu-item [matMenuTriggerFor]="profile">
+    <a mat-menu-item>
       <mat-icon>person</mat-icon>
       <span>Profile</span>
+    </a>
+    <a mat-menu-item>
+      <mat-icon>settings</mat-icon>
+      <span>Parametres</span>
     </a>
     <a mat-menu-item [matMenuTriggerFor]="users" *ngIf="hasAdminAuthority">
       <mat-icon>group</mat-icon>
@@ -56,7 +40,7 @@
     </a>
     <a mat-menu-item (click)="logout()">
       <mat-icon>clear</mat-icon>
-      <span>Logout</span>
+      <span>Deconnexion</span>
     </a>
   </mat-menu>
 

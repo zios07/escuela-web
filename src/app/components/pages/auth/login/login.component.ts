@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.authService.login(this.form.value).delay(2000).subscribe((resp: any) => {
+    this.authService.login(this.form.value).delay(1000).subscribe((resp: any) => {
       this.tokenService.saveToken(resp);
       this.userService.findByUsername(this.form.value.username).subscribe(resp => {
         this.authService.setConnectedUser(resp);
