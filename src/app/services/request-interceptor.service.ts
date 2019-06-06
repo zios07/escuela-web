@@ -1,5 +1,5 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpUserEvent, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
 
@@ -14,18 +14,21 @@ export class RequestInterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // add a custom header
-    let token:string = this.tokenService.getToken();
+    // TODO: token expiration check
 
-    let customReq ;
-    if(token === null)
+    // add a custom header
+    const token: string = this.tokenService.getToken();
+
+    let customReq;
+    if (token === null) {
       customReq = request.clone();
-    else
+    } else {
       customReq = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + this.tokenService.getToken())
       });
-		// pass on the modified request object
-		return next.handle(customReq);
+    }
+    // pass on the modified request object
+    return next.handle(customReq);
   }
-  
+
 }

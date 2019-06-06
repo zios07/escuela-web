@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
@@ -6,12 +6,19 @@ import { JwtAuthenticationRequest } from '../models/JwtAuthenticationRequest';
 import { User } from '../models/User';
 import { TokenService } from './token.service';
 
+const BASE_URL = environment.API_URL;
+const API_USERS_URL = BASE_URL + '/users';
+const API_PERMISSION_URL = BASE_URL + '/permissions';
+const API_ROLES_URL = BASE_URL + '/roles';
+const API_LOGIN_URL = BASE_URL + '/v1/authentication/authenticate';
+const API_REGISTRATION_URL = BASE_URL + '/users/register';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  url: string = environment.API_URL;
+  jwtHelper = new JwtHelperService();
 
   constructor(
     private http: HttpClient,
@@ -19,62 +26,37 @@ export class AuthenticationService {
   ) { }
 
   login(jwtAuthenticationRequest: JwtAuthenticationRequest) {
-    return this.http.post(this.url + "/auth", jwtAuthenticationRequest);
+    return this.http.post(API_LOGIN_URL, jwtAuthenticationRequest, { responseType: 'text' });
   }
 
   register(user: User) {
-    return this.http.post(this.url + "/auth/register", user);
-  }
-
-  loadAuthorities() {
-    return this.http.get(this.url + "/authorities");
+    return this.http.post(API_REGISTRATION_URL, user);
   }
 
   getConnectedUser() {
     let user: User;
-    let stringUser = localStorage.getItem('connectedUser');
+    const stringUser = localStorage.getItem('connectedUser');
     if (stringUser) {
       user = JSON.parse(stringUser);
     }
     return user;
   }
 
-  getUserAuthorities() {
-    let user: User = this.getConnectedUser();
-    if (user)
-      return user.authorities;
-  }
-
   isAdmin() {
-    let auths = this.getUserAuthorities();
-    let isAdmin: boolean = false;
-    if (auths) {
-      auths.forEach(authority => {
-        if (authority.name === "ROLE_ADMIN")
-          isAdmin = true;
-      });
+    const token = localStorage.getItem('token');
+    const decodedToken: any = this.jwtHelper.decodeToken(token);
+    if (decodedToken && decodedToken.role && decodedToken.role.indexOf('ADMIN') > -1) {
+      return true;
     }
-    return isAdmin;
-  }
-
-  isCurator() {
-    let auths = this.getUserAuthorities();
-    let isCurator: boolean = false;
-    if (auths) {
-      auths.forEach(authority => {
-        if (authority.name === "ROLE_CURATOR")
-          isCurator = true;
-      });
-    }
-    return isCurator;
+    return false;
   }
 
   isAuthenticated() {
-    let jwtHelper = new JwtHelperService();
-    let token = this.tokenService.getToken();
-    if (!token)
+    const token = this.tokenService.getToken();
+    if (!token) {
       return false;
-    let isExpired = jwtHelper.isTokenExpired(token);
+    }
+    const isExpired = this.jwtHelper.isTokenExpired(token);
     return !isExpired;
   }
 

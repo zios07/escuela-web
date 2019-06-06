@@ -7,6 +7,7 @@ import 'rxjs/add/operator/delay';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { TokenService } from '../../../../services/token.service';
 import { UserService } from '../../../../services/user.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,11 @@ export class LoginComponent implements OnInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private userService: UserService,
-              private authService: AuthenticationService,
-              private tokenService: TokenService,
-              private toastr: ToastrService) {
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthenticationService,
+    private tokenService: TokenService,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -42,19 +43,21 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.authService.login(this.form.value).delay(2000).subscribe((resp : any) => {
-      this.tokenService.saveToken(resp.token);
+    this.authService.login(this.form.value).delay(2000).subscribe((resp: any) => {
+      this.tokenService.saveToken(resp);
       this.userService.findByUsername(this.form.value.username).subscribe(resp => {
         this.authService.setConnectedUser(resp);
-        if(this.returnUrl)
+        if (this.returnUrl) {
           this.router.navigate([this.returnUrl]);
-        else
+        } else {
           this.router.navigate(['home']);
-      })
+        }
+      });
     }, resp => {
-      this.submitted = false
-      if( resp.status === 401)
-        resp.error ? this.toastr.error(resp.error) : this.toastr.error("Incorrect credentials");
+      this.submitted = false;
+      if (resp.status === 401) {
+        resp.error ? this.toastr.error(resp.error) : this.toastr.error('Incorrect credentials');
+      }
     });
   }
 }

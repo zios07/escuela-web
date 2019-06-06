@@ -1,16 +1,57 @@
-import { Authority } from "./Authority";
+import { Account } from "./Account";
+import { Role } from "./Role";
 
 export class User {
+
     id: number;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    password: string;
-    birthday: Date;
-    gender: string;
-    height: number;
-    weight: number;
-    authorities: Array<Authority>;
-    username:string;
-    stringAuthorities:string;
+    account: Account;
+    role: Role;
+    bDate: Date;
+
+    constructor(id?: number, firstName?: string, lastName?: string, email?: string, account?: Account, role?: Role, bDate?: Date) {
+
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.account = account;
+        this.role = role;
+        this.bDate = bDate;
+    }
+
+    getFirstName() {
+        return this.firstName;
+    }
+
+    getLastName() {
+        return this.lastName;
+    }
+
+    getEmail() {
+        return this.email;
+    }
+
+    getAccount() {
+        return this.account;
+    }
+
+    getRole() {
+        return this.role;
+    }
+
+    getBDate() {
+        return this.bDate;
+    }
+
+    setAccount(ac: Account) {
+        this.account = ac;
+    }
+
+    setRole(rl: Role) {
+        this.role = rl;
+    }
+
 }
