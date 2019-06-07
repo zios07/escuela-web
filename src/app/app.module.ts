@@ -23,6 +23,12 @@ import { ActivitiesComponent } from './components/pages/eleve/activities/activit
 import { RecompensesComponent } from './components/pages/eleve/recompenses/recompenses.component';
 import { BoutiqueComponent } from './components/pages/shared/boutique/boutique.component';
 import { EnfantsComponent } from './components/pages/parent/enfants/enfants.component';
+import { TeachersComponent } from './components/pages/shared/teachers/teachers.component';
+import { TestComponent } from './components/pages/eleve/test/test.component';
+import { VideoCourseComponent } from './components/pages/eleve/video-course/video-course.component';
+import { TextCourseComponent } from './components/pages/eleve/text-course/text-course.component';
+import { ProfilComponent } from './components/pages/eleve/profil/profil.component';
+import { ParametresComponent } from './components/pages/eleve/parametres/parametres.component';
 
 
 @NgModule({
@@ -40,7 +46,13 @@ import { EnfantsComponent } from './components/pages/parent/enfants/enfants.comp
     EnfantsComponent,
     ContactComponent,
     AddEnfantComponent,
-    PanierComponent
+    PanierComponent,
+    TeachersComponent,
+    TestComponent,
+    VideoCourseComponent,
+    TextCourseComponent,
+    ProfilComponent,
+    ParametresComponent
   ],
   imports: [
     BrowserModule,
