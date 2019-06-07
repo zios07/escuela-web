@@ -3,8 +3,7 @@ export class Role {
     roleCode: string;
     roleLabel: string;
 
-    constructor(id?: number, roleCode?: string, roleLabel?: string) {
-        this.id = id;
+    constructor(roleCode?: string, roleLabel?: string) {
         this.roleCode = roleCode;
         this.roleLabel = roleLabel;
     }

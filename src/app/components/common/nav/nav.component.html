@@ -1,42 +1,45 @@
-<mat-toolbar color="primary" *ngIf="isAuthenticated()">
+<mat-toolbar color="primary" *ngIf="authenticated">
   <a mat-button color="secondary" routerLink="home">
     <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
     <span>HOME</span>
   </a>
 
-  <button mat-icon-button class="nav-item" routerLink="courses">
-    <!-- <mat-icon>list</mat-icon>&nbsp; -->
+  <!-- Eleve menu -->
+  <button mat-icon-button class="nav-item" routerLink="cours" *ngIf="connectedRole === 'ELEVE'">
     <span>Mes cours</span>
   </button>
-
-  <button mat-icon-button class="nav-item" routerLink="activities">
-    <!-- <mat-icon>event</mat-icon>&nbsp; -->
+  <button mat-icon-button class="nav-item" routerLink="activities" *ngIf="connectedRole === 'ELEVE'">
     <span>Activites</span>
   </button>
-
-  <button mat-icon-button class="nav-item" routerLink="recompences">
-    <!-- <mat-icon>assessment</mat-icon>&nbsp; -->
+  <button mat-icon-button class="nav-item" routerLink="recompences" *ngIf="connectedRole === 'ELEVE'">
     <span>Recompences</span>
   </button>
 
+  <!-- Parent menu -->
+  <button mat-icon-button class="nav-item" routerLink="boutique" *ngIf="connectedRole === 'PARENT'">
+    <span>Boutique</span>
+  </button>
+  <button mat-icon-button class="nav-item" routerLink="panier" *ngIf="connectedRole === 'PARENT'">
+    <span>Panier</span>
+  </button>
+  <button mat-icon-button class="nav-item" routerLink="enfants" *ngIf="connectedRole === 'PARENT'">
+    <span>Mes enfants</span>
+  </button>
+
   <span class="fill-remaining-space"></span>
-  <span class="welcome-span" *ngIf="isAuthenticated()">Signed in as <b>{{username}}</b></span>
+  <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{username}}</b></span>
   <button class="mat-button-menu" mat-button [matMenuTriggerFor]="menuList">
     <mat-icon>menu</mat-icon>
   </button>
 
   <mat-menu #menuList="matMenu">
-    <a mat-menu-item>
+    <a mat-menu-item routerLink="profil">
       <mat-icon>person</mat-icon>
-      <span>Profile</span>
+      <span>Profil</span>
     </a>
-    <a mat-menu-item>
+    <a mat-menu-item routerLink="parametres">
       <mat-icon>settings</mat-icon>
       <span>Parametres</span>
-    </a>
-    <a mat-menu-item [matMenuTriggerFor]="users" *ngIf="hasAdminAuthority">
-      <mat-icon>group</mat-icon>
-      <span>Manage Users</span>
     </a>
     <a mat-menu-item (click)="logout()">
       <mat-icon>clear</mat-icon>
@@ -44,21 +47,9 @@
     </a>
   </mat-menu>
 
-  <mat-menu #users="matMenu">
-    <a mat-menu-item routerLink="admin/users">
-      <mat-icon>edit</mat-icon>
-      <span>Update Users</span>
-    </a>
-  </mat-menu>
-  <mat-menu #profile="matMenu">
-    <a mat-menu-item routerLink="profile/edit">
-      <mat-icon>edit</mat-icon>
-      <span>Update Profile</span>
-    </a>
-  </mat-menu>
 </mat-toolbar>
 
-<mat-toolbar color="primary" *ngIf="!isAuthenticated()">
+<mat-toolbar color="primary" *ngIf="!authenticated">
 
   <a mat-button color="primary" routerLink="">
     <mat-icon>home</mat-icon>&nbsp;

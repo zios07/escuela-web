@@ -7,6 +7,7 @@ import { User } from '../../../../models/User';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { TokenService } from '../../../../services/token.service';
 import { Account } from 'src/app/models/Account';
+import { Role } from 'src/app/models/Role';
 
 @Component({
   selector: 'app-register',
@@ -40,6 +41,7 @@ export class RegisterComponent implements OnInit {
       firstName:['', Validators.compose([Validators.required])],
       lastName: ['', Validators.compose([Validators.required])],
       email: ['', Validators.compose([Validators.required])],
+      role: ['', Validators.compose([Validators.required])],
       bDate: ['', Validators.compose([Validators.required])],
       gender: ['']
     });
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     const user = this.form.value;
     user.account = new Account(this.form.value.username, this.form.value.password);
+    user.role = new Role(this.form.value.role);
     this.authService.register(user).delay(1500).subscribe(resp => {
       this.authService.setConnectedUser(resp);
       this.router.navigate(['/']);

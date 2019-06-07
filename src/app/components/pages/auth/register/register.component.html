@@ -2,17 +2,13 @@
 
   <mat-card elevation="5" fxFlex>
 
-    <mat-card-subtitle>
-      <h2>E-scuela</h2>
-    </mat-card-subtitle>
-
     <mat-card-title>
       <h2>{{ title }}</h2>
     </mat-card-title>
 
     <mat-card-content>
       <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
-        <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-list cols="3" rowHeight="100px">
           <mat-grid-tile>
             <mat-form-field>
               <input matInput formControlName="username" required placeholder="Username">
@@ -27,6 +23,13 @@
             <mat-form-field>
               <input matInput placeholder="Confirmation" formControlName="password" required type="password">
             </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label>Role</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-group formControlName="role">
+              <mat-radio-button value="ELEVE">Eleve</mat-radio-button>&nbsp;
+              <mat-radio-button value="PARENT">Parent</mat-radio-button>
+            </mat-radio-group>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field>
@@ -51,7 +54,7 @@
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
-            <label>Gender: </label>&nbsp;
+            <label>Gender</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <mat-radio-group formControlName="gender">
               <mat-radio-button value="male">Male</mat-radio-button>&nbsp;
               <mat-radio-button value="female">Female</mat-radio-button>
