@@ -23,6 +23,10 @@ export class CoursService {
     return this.http.get(API_COURS_URL + '?page=' + page + '&size=' + size);
   }
 
+  searchCourses(page, size, keyword) {
+    return this.http.get(API_COURS_URL + '/search?page=' + page + '&size=' + size + '&keyword=' + keyword);
+  }
+
   delete(id) {
     return this.http.delete(API_COURS_URL + '/' + id);
   }

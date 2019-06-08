@@ -1,3 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="searchCourses()" #searchForm="ngForm">
+  <mat-form-field class="search-form">
+    <input matInput formControlName="searchKeyWord" placeholder="Nom du cours">
+  </mat-form-field>
+  <button mat-raised-button type="submit" [disabled]="!form.value.searchKeyWord" color="primary">search</button>&nbsp;&nbsp;
+  <button mat-raised-button [disabled]="!form.value.searchKeyWord" (click)="clear()">Clear</button>
+</form>
+
 <mat-grid-list cols="4" rowHeight="1:1">
   <mat-grid-tile class="course-grid-tile" *ngFor="let course of courses">
     <mat-card class="example-card wrapper">
@@ -26,5 +34,6 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = pageChanged($event)">
+<mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent = pageChanged($event)">
 </mat-paginator>
