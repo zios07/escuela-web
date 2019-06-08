@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PageEvent } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { CoursService } from 'src/app/services/cours.service';
-import { PageEvent } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PanierService } from 'src/app/services/panier.service';
+import { ArrayDataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-boutique',
@@ -22,7 +24,7 @@ export class BoutiqueComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
 
-  constructor(private formBuilder: FormBuilder, private courseService: CoursService, private toastr: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private courseService: CoursService, private toastr: ToastrService, private panierService: PanierService) { }
 
   ngOnInit() {
 
@@ -32,13 +34,21 @@ export class BoutiqueComponent implements OnInit {
     this.loadCourses();
   }
 
+  addToCart(course) {
+    this.panierService.addCourseToPanier(course).then(resp => {
+      course.inPanier = true;
+      this.toastr.info('Le cours est maintenant dans votre panier !');
+    });
+  }
+
   loadCourses() {
     this.courseService.getCourses(this.page, this.size).subscribe((resp: any) => {
       this.courses = resp.content;
       this.length = resp.totalElements;
+      this.checkPanierCourses();
     }, error => {
       this.toastr.error(JSON.stringify(error));
-    })
+    });
   }
 
   pageChanged(event) {
@@ -63,7 +73,22 @@ export class BoutiqueComponent implements OnInit {
       this.length = resp.totalElements;
     }, error => {
       this.toastr.error(JSON.stringify(error));
+    });
+  }
+
+  checkPanierCourses() {
+    this.panierService.getPanierCourses().then(resp => {
+      if (resp && resp.courses && resp.courses.length > 0) {
+        resp.courses.forEach(element => {
+          this.courses.forEach((course: any) => {
+            if (course.id === element.id) {
+              course.inPanier = true;
+            }
+          });
+        });
+      }
     })
   }
+
 
 }

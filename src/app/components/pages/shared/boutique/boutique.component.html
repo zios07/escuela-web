@@ -27,7 +27,11 @@
         <p>Prix : {{course.prix | currency}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary">Ajouter Au Panier</button>
+        <button *ngIf="!course.inPanier" mat-raised-button color="primary" (click)="addToCart(course)">Ajouter Au Panier</button>
+        <button *ngIf="course.inPanier" mat-raised-button disabled>
+          <mat-icon>checked</mat-icon>
+          Déja dans votre panier
+        </button>
       </mat-card-actions>
       <!-- </div> -->
     </mat-card>
