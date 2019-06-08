@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'activities', component: ActivitiesComponent },
   { path: 'recompenses', component: RecompensesComponent },
-  { path: 'profil', component:  ProfilComponent},
+  { path: 'profil', component: ProfilComponent },
   { path: 'parametres', component: ParametresComponent },
   { path: 'cours', component: CoursesComponent },
   { path: 'cours/video', component: EnfantsComponent },
@@ -39,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

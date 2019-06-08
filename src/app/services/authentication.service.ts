@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
@@ -19,6 +19,7 @@ const API_REGISTRATION_URL = BASE_URL + '/users/register';
 export class AuthenticationService {
 
   jwtHelper = new JwtHelperService();
+  connectedUser: User;
 
   constructor(
     private http: HttpClient,
@@ -33,13 +34,15 @@ export class AuthenticationService {
     return this.http.post(API_REGISTRATION_URL, user);
   }
 
-  getConnectedUser() {
-    let user: User;
-    const stringUser = localStorage.getItem('connectedUser');
-    if (stringUser) {
-      user = JSON.parse(stringUser);
+  async getConnectedUser() {
+    if (this.connectedUser) {
+      return this.connectedUser;
+    } else {
+      const stringUser = await localStorage.getItem('connectedUser');;
+      if (stringUser) {
+        return JSON.parse(stringUser);
+      }
     }
-    return user;
   }
 
   isAdmin() {
@@ -66,6 +69,7 @@ export class AuthenticationService {
   }
 
   setConnectedUser(user) {
+    this.connectedUser = user;
     localStorage.setItem('connectedUser', JSON.stringify(user));
   }
 }

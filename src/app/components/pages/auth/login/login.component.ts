@@ -55,8 +55,10 @@ export class LoginComponent implements OnInit {
       });
     }, resp => {
       this.submitted = false;
-      if (resp.status === 401) {
+      if (resp.status === 401 || resp.status === 403) {
         resp.error ? this.toastr.error(resp.error) : this.toastr.error('Incorrect credentials');
+      } else {
+        this.toastr.error('Login error. Try again later');
       }
     });
   }

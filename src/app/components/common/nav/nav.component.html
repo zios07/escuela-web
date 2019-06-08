@@ -11,7 +11,7 @@
   <button mat-icon-button class="nav-item" routerLink="activities" *ngIf="connectedRole === 'ELEVE'">
     <span>Activites</span>
   </button>
-  <button mat-icon-button class="nav-item" routerLink="recompences" *ngIf="connectedRole === 'ELEVE'">
+  <button mat-icon-button class="nav-item" routerLink="recompenses" *ngIf="connectedRole === 'ELEVE'">
     <span>Recompences</span>
   </button>
 
@@ -27,7 +27,7 @@
   </button>
 
   <span class="fill-remaining-space"></span>
-  <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{username}}</b></span>
+  <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.account.username}}</b></span>
   <button class="mat-button-menu" mat-button [matMenuTriggerFor]="menuList">
     <mat-icon>menu</mat-icon>
   </button>
