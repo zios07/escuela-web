@@ -1,0 +1,38 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+
+const BASE_URL = environment.API_URL;
+const API_COURS_URL = BASE_URL + '/courses';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CoursService {
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  updateCourse(course) {
+    return this.http.put(API_COURS_URL, course);
+  }
+
+  getCourses() {
+    return this.http.get(API_COURS_URL);
+  }
+
+  delete(id) {
+    return this.http.delete(API_COURS_URL + '/' + id);
+  }
+
+  save(course) {
+    return this.http.post(API_COURS_URL, course);
+  }
+
+  findById(id) {
+    return this.http.get(API_COURS_URL + '/' + id);
+  }
+
+}

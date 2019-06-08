@@ -8,22 +8,19 @@ import 'rxjs/add/observable/of';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
 
-  }
+  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-  canActivate(router: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot) {
     let activate = false;
-    let jwtHelper = new JwtHelperService();
-    var token = localStorage.getItem('token');
+    const jwtHelper = new JwtHelperService();
+    const token = localStorage.getItem('token');
     if (token) {
       activate = !jwtHelper.isTokenExpired(token);
     }
-
-    if (activate)
+    if (activate) {
       return activate;
-
+    }
     this.router.navigate([''], { queryParams: { src: state.url } });
     return false;
   }

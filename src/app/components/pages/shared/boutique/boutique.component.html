@@ -1,3 +1,27 @@
-<p>
-  boutique works!
-</p>
+<mat-grid-list cols="4" rowHeight="1:1">
+  <mat-grid-tile class="course-grid-tile" *ngFor="let course of courses">
+    <mat-card class="example-card wrapper">
+      <!-- <div> -->
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{course.nom}}</mat-card-title>
+          <mat-card-subtitle>{{course.description}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Teacher : {{course.teacher?.firstName}} {{course.teacher?.lastName}}</p>
+          <p>Niveau : {{course.niveau}}</p>
+          <p>Niveau : {{course.nbVisiteurs}}</p>
+          <p>Note : <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+          </p>
+          <p>Prix : {{course.prix | currency}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Ajouter Au Panier</button>
+        </mat-card-actions>
+      <!-- </div> -->
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

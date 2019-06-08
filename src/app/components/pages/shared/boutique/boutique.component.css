@@ -1,0 +1,14 @@
+.example-card {
+    max-width: 400px;
+}
+
+.wrapper {
+  justify-content: center;
+  width: 65%;
+  height: 65%;
+}
+
+.example-header-image {
+  background-image: url('https://angular.io/assets/images/logos/angular/angular.svg');
+  background-size: cover;
+}
