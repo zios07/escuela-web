@@ -19,8 +19,8 @@ export class CoursService {
     return this.http.put(API_COURS_URL, course);
   }
 
-  getCourses() {
-    return this.http.get(API_COURS_URL);
+  getCourses(page, size) {
+    return this.http.get(API_COURS_URL + '?page=' + page + '&size=' + size);
   }
 
   delete(id) {
