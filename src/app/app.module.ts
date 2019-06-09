@@ -29,7 +29,7 @@ import { VideoCourseComponent } from './components/pages/eleve/video-course/vide
 import { TextCourseComponent } from './components/pages/eleve/text-course/text-course.component';
 import { ProfilComponent } from './components/pages/eleve/profil/profil.component';
 import { ParametresComponent } from './components/pages/eleve/parametres/parametres.component';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -81,7 +81,8 @@ import { ParametresComponent } from './components/pages/eleve/parametres/paramet
     MatNativeDateModule,
     MatButtonToggleModule,
     MatCheckboxModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     DatePipe,
