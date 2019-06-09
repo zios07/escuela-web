@@ -32,7 +32,7 @@ export class PanierService {
     }
   }
 
-  async getCachePanierCourses() {
+  private async getCachePanierCourses() {
     const panierCache = await localStorage.getItem('panier');
     if (panierCache) {
       return JSON.parse(panierCache);
@@ -40,7 +40,7 @@ export class PanierService {
     return [];
   }
 
-  async addCourseToCachePanier(course) {
+  private async addCourseToCachePanier(course) {
     let panier;
     let courses;
     const panierCache = await localStorage.getItem('panier');

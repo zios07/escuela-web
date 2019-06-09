@@ -5,7 +5,7 @@ import { LoginComponent } from './components/pages/auth/login/login.component';
 import { RegisterComponent } from './components/pages/auth/register/register.component';
 import { HomeComponent } from './components/pages/shared/home/home.component';
 import { BoutiqueComponent } from './components/pages/shared/boutique/boutique.component';
-import { PanierComponent } from './components/pages/parent/panier/panier.component';
+import { PanierComponent } from './components/pages/shared/panier/panier.component';
 import { TeachersComponent } from './components/pages/shared/teachers/teachers.component';
 import { AddEnfantComponent } from './components/pages/parent/add-enfant/add-enfant.component';
 import { EnfantsComponent } from './components/pages/parent/enfants/enfants.component';

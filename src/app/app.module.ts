@@ -16,7 +16,7 @@ import { RequestInterceptorService } from './services/request-interceptor.servic
 import { FooterComponent } from './components/common/footer/footer.component';
 import { ContactComponent } from './components/pages/shared/contact/contact.component';
 import { AddEnfantComponent } from './components/pages/parent/add-enfant/add-enfant.component';
-import { PanierComponent } from './components/pages/parent/panier/panier.component';
+import { PanierComponent } from './components/pages/shared/panier/panier.component';
 import { HomeComponent } from './components/pages/shared/home/home.component';
 import { CoursesComponent } from './components/pages/eleve/courses/courses.component';
 import { ActivitiesComponent } from './components/pages/eleve/activities/activities.component';
