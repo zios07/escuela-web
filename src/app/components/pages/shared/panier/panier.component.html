@@ -38,6 +38,11 @@
               <h4 class="font-weight-bold blue-text">
                 <strong>{{course.prix | currency}}</strong>
               </h4>
+<!-- 
+              <button mat-raised-button (click)="removeFromPanier(course)">
+                <mat-icon>remove</mat-icon>
+                Supprimer du panier
+              </button> -->
             </div>
             <!-- Card content -->
           </div>
@@ -48,6 +53,10 @@
         <!-- Grid row -->
         <div *ngIf="(i+1) % 3 === 0" class="w-100"></div>
       </ng-container>
+    </div>
+
+    <div>
+      <h2>Total price : {{totalPrice | currency}}</h2>
     </div>
 
   </section>

@@ -16,31 +16,43 @@ export class PanierService {
     private auth: AuthenticationService) { }
 
 
-  async addCourseToPanier(course) {
+  addCourseToPanier(course) {
+    return this.http.post(API_PANIER_URL, course);
+  }
+
+  getPanierCourses() {
+    return this.http.get(API_PANIER_URL);
+  }
+
+  removeCourseFromPanier(courseID) {
+
     if (this.auth.isAuthenticated()) {
-      return this.http.put(API_PANIER_URL, course);
+      return this.http.delete(API_PANIER_URL + '/delete/course/' + courseID);
     } else {
-      return this.addCourseToCachePanier(course);
+      const updatedCourses = this.getPanierCourses().subscribe((resp: any) => {
+        resp.courses.filter(element => element.id !== courseID);
+        this.clearPanier();
+        this.addCourseToPanier(updatedCourses);
+      })
     }
   }
 
-  async getPanierCourses() {
-    if (this.auth.isAuthenticated()) {
-      return this.http.get(API_PANIER_URL);
-    } else {
-      return this.getCachePanierCourses();
-    }
+  clearPanier() {
+    localStorage.removeItem('panier');
   }
 
-  private async getCachePanierCourses() {
+  async getCachePanierCourses() {
     const panierCache = await localStorage.getItem('panier');
     if (panierCache) {
-      return JSON.parse(panierCache);
+      const panier = JSON.parse(panierCache);
+      if (panier) {
+        return panier.courses;
+      }
     }
     return [];
   }
 
-  private async addCourseToCachePanier(course) {
+  async addCourseToCachePanier(course) {
     let panier;
     let courses;
     const panierCache = await localStorage.getItem('panier');

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CoursService } from 'src/app/services/cours.service';
 import { PanierService } from 'src/app/services/panier.service';
 import { ArrayDataSource } from '@angular/cdk/collections';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-boutique',
@@ -24,7 +25,7 @@ export class BoutiqueComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
 
-  constructor(private formBuilder: FormBuilder, private courseService: CoursService, private toastr: ToastrService, private panierService: PanierService) { }
+  constructor(private formBuilder: FormBuilder, private auth: AuthenticationService, private courseService: CoursService, private toastr: ToastrService, private panierService: PanierService) { }
 
   ngOnInit() {
 
@@ -35,10 +36,17 @@ export class BoutiqueComponent implements OnInit {
   }
 
   addToCart(course) {
-    this.panierService.addCourseToPanier(course).then(resp => {
-      course.inPanier = true;
-      this.toastr.info('Le cours est maintenant dans votre panier !');
-    });
+    if (this.auth.isAuthenticated()) {
+      this.panierService.addCourseToPanier(course).subscribe((resp: any) => {
+        course.inPanier = true;
+        this.toastr.info('Le cours est maintenant dans votre panier !');
+      })
+    } else {
+      this.panierService.addCourseToCachePanier(course).then(resp => {
+        course.inPanier = true;
+        this.toastr.info('Le cours est maintenant dans votre panier !');
+      })
+    }
   }
 
   loadCourses() {
@@ -77,18 +85,31 @@ export class BoutiqueComponent implements OnInit {
   }
 
   checkPanierCourses() {
-    this.panierService.getPanierCourses().then(resp => {
-      if (resp && resp.courses && resp.courses.length > 0) {
-        resp.courses.forEach(element => {
-          this.courses.forEach((course: any) => {
-            if (course.id === element.id) {
-              course.inPanier = true;
-            }
+    if (this.auth.isAuthenticated()) {
+      this.panierService.getPanierCourses().subscribe((resp: any) => {
+        if (resp && resp.courses && resp.courses.length > 0) {
+          resp.courses.forEach(element => {
+            this.courses.forEach((course: any) => {
+              if (course.id === element.id) {
+                course.inPanier = true;
+              }
+            });
           });
-        });
-      }
-    })
+        }
+      })
+    } else {
+      this.panierService.getCachePanierCourses().then((resp: any) => {
+        if (resp && resp && resp.length > 0) {
+          resp.forEach(element => {
+            this.courses.forEach((course: any) => {
+              if (course.id === element.id) {
+                course.inPanier = true;
+              }
+            });
+          });
+        }
+      });
+    }
   }
-
 
 }
