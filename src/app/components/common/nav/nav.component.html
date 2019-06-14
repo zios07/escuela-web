@@ -23,9 +23,22 @@
     <button mat-icon-button class="nav-item" routerLink="panier" *ngIf="connectedRole === 'PARENT'">
       <span>Panier</span>
     </button>
-    <button mat-icon-button class="nav-item" routerLink="enfants" *ngIf="connectedRole === 'PARENT'">
-      <span>Mes enfants</span>
+    <button mat-icon-button class="nav-item" [matMenuTriggerFor]="enfants" *ngIf="connectedRole === 'PARENT'">
+      <span>Enfants</span>
     </button>
+
+    <!-- submenu enfants -->
+    <mat-menu #enfants="matMenu">
+      <a mat-menu-item routerLink="enfants">
+        <mat-icon>list</mat-icon>
+        <span>Mes enfants</span>
+      </a>
+      <a mat-menu-item routerLink="enfants/form">
+        <mat-icon>add</mat-icon>
+        <span>Ajouter un enfant</span>
+      </a>
+    </mat-menu>
+
 
     <span class="fill-remaining-space"></span>
     <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.account.username}}</b></span>

@@ -1,3 +1,73 @@
-<p>
-  add-enfant works!
-</p>
+<div class="content" fxLayout="row" fxLayoutAlign="center">
+
+  <mat-card elevation="5" fxFlex>
+
+    <mat-card-title>
+      <h2 align="center">{{ title }}</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+      <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
+        <mat-grid-list cols="3" rowHeight="100px">
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="First Name" formControlName="firstName" required>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Last Name" formControlName="lastName" required>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput formControlName="username" required placeholder="Username">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Password" formControlName="password" required type="password">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email" required type="email">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="date-form-field">
+              <input [matDatepicker]="picker" matInput placeholder="birthday" formControlName="bDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi="true" #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label>Role</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-group disabled formControlName="role">
+              <mat-radio-button checked value="ELEVE">Eleve</mat-radio-button>&nbsp;
+              <mat-radio-button value="PARENT">Parent</mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <label>Sexe</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-group formControlName="gender">
+              <mat-radio-button value="male">Masculin</mat-radio-button>&nbsp;
+              <mat-radio-button value="female">Feminin</mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <!-- <mat-form-field> -->
+            <button type="submit" [disabled]="!signupForm.form.valid" mat-raised-button color="primary">Enregistrer
+              enfant</button>
+            <!-- </mat-form-field> -->
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </form>
+      <br>
+
+      <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+      <br>
+    </mat-card-content>
+  </mat-card>
+</div>

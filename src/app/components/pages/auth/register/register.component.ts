@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
   user: User = new User();
 
   returnUrl: string;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,

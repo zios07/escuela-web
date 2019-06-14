@@ -33,7 +33,8 @@ const routes: Routes = [
   { path: 'cours/text', component: EnfantsComponent },
   { path: 'test', component: EnfantsComponent },
   { path: 'enfants', component: EnfantsComponent },
-  { path: 'enfants/add', component: AddEnfantComponent },
+  { path: 'enfants/form', component: AddEnfantComponent },
+  { path: 'enfants/form/:id', component: AddEnfantComponent },
   { path: '**', redirectTo: '' }
 
 ];

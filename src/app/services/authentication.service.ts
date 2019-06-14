@@ -7,9 +7,6 @@ import { User } from '../models/User';
 import { TokenService } from './token.service';
 
 const BASE_URL = environment.API_URL;
-const API_USERS_URL = BASE_URL + '/users';
-const API_PERMISSION_URL = BASE_URL + '/permissions';
-const API_ROLES_URL = BASE_URL + '/roles';
 const API_LOGIN_URL = BASE_URL + '/v1/authentication/authenticate';
 const API_REGISTRATION_URL = BASE_URL + '/users/register';
 
