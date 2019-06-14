@@ -58,7 +58,8 @@ export class RegisterComponent implements OnInit {
       this.toastr.success('Registered successfully');
     }, error => {
       this.submitted = false;
-      this.toastr.error('Error while registering');
+      const message = error.error ? error.error.message ? error.error.message : 'Error occured' : 'Error occured';
+      this.toastr.error(message);
     });
   }
 
