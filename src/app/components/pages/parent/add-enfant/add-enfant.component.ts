@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Account } from 'src/app/models/Account';
 import { EnfantService } from 'src/app/services/enfant.service';
 import { User } from '../../../../models/User';
+import { UserService } from 'src/app/services/user.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-enfant',
@@ -18,6 +21,8 @@ export class AddEnfantComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   user: User = new User();
+  password;
+  mode = 'ADD';
 
   returnUrl: string;
 
@@ -25,12 +30,12 @@ export class AddEnfantComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private enfantService: EnfantService,
+    private userService: UserService,
     private toastr: ToastrService
   ) {
     // check if we're in edit mode
-    if (route.snapshot.params.id) {
-      this.loadEnfantToEdit(route.snapshot.params.id);
-    }
+    this.loadEnfantToEdit();
+
   }
 
   ngOnInit() {
@@ -39,7 +44,7 @@ export class AddEnfantComponent implements OnInit {
       password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
       firstName: ['', Validators.compose([Validators.required])],
       lastName: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required])],
+      email: [null],
       role: [null],
       bDate: ['', Validators.compose([Validators.required])],
       gender: ['']
@@ -50,8 +55,12 @@ export class AddEnfantComponent implements OnInit {
     this.submitted = true;
     const enfant = this.form.value;
     enfant.account = new Account(this.form.value.username, this.form.value.password);
-    this.enfantService.addEnfant(enfant).delay(1000).subscribe(resp => {
-      this.toastr.success('Registered successfully');
+    // Edit moode
+    if (!this.form.value.password) {
+      enfant.account.password = this.password;
+    }
+    this.enfantService.addEnfant(enfant, this.mode).delay(1000).subscribe(resp => {
+      this.toastr.success('Enfant enregistré avec succès');
       this.submitted = false;
     }, error => {
       this.submitted = false;
@@ -60,8 +69,29 @@ export class AddEnfantComponent implements OnInit {
     });
   }
 
-  loadEnfantToEdit(id) {
+  loadEnfantToEdit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.mode = 'EDIT';
+      this.userService.findById(id).subscribe((result: User) => {
+        this.fillForm(result);
+      }, error => {
+        this.toastr.error(String(error));
+      });
+    }
+  }
 
+  fillForm(enfant) {
+    if (enfant) {
+      this.form.get('username').setValue(enfant.account.username);
+      // this.form.get('password').setValue(enfant.account.password);
+      this.form.get('firstName').setValue(enfant.firstName);
+      this.form.get('lastName').setValue(enfant.lastName);
+      this.form.get('email').setValue(enfant.email);
+      this.form.get('bDate').setValue(enfant.bDate);
+      this.form.get('gender').setValue(enfant.gender);
+      this.password = enfant.account.password;
+    }
   }
 
 }
