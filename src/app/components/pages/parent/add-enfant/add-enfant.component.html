@@ -24,9 +24,9 @@
               <input matInput formControlName="username" required placeholder="Username">
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile>
+          <mat-grid-tile *ngIf="mode === 'ADD'">
             <mat-form-field>
-              <input matInput placeholder="Password" formControlName="password" required type="password">
+              <input matInput placeholder="Password" formControlName="password" type="password">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>

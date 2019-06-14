@@ -3,6 +3,7 @@ import { User } from 'src/app/models/User';
 import { MatTableDataSource } from '@angular/material';
 import { EnfantService } from 'src/app/services/enfant.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-enfants',
@@ -24,7 +25,7 @@ export class EnfantsComponent implements OnInit {
   displayedColumns = [];
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
 
-  constructor(private enfantService: EnfantService, private toastr: ToastrService) { }
+  constructor(private router: Router, private enfantService: EnfantService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.initColumns();
@@ -48,6 +49,21 @@ export class EnfantsComponent implements OnInit {
       this.loading = false;
       this.toastr.error('Error while loading enfants');
     })
+  }
+
+  deleteEleve(row) {
+    this.loading = true;
+    this.enfantService.deleteEnfant(row.id).subscribe(resp => {
+      this.loading = false;
+      this.loadEnfants();
+    }, error => {
+      this.loading = false;
+      this.toastr.error('Error while deleting enfant : ' + row.username);
+    })
+  }
+
+  editEleve(row) {
+    this.router.navigate(['enfants/form/', row.id]);
   }
 
 }

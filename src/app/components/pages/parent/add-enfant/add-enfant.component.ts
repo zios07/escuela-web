@@ -83,8 +83,11 @@ export class AddEnfantComponent implements OnInit {
 
   fillForm(enfant) {
     if (enfant) {
+      this.form.get('username').disable();
       this.form.get('username').setValue(enfant.account.username);
       // this.form.get('password').setValue(enfant.account.password);
+      this.form.get('password').setValidators(null);
+      this.form.get('password').updateValueAndValidity();
       this.form.get('firstName').setValue(enfant.firstName);
       this.form.get('lastName').setValue(enfant.lastName);
       this.form.get('email').setValue(enfant.email);

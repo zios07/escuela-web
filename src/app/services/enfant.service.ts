@@ -25,6 +25,10 @@ export class EnfantService {
     return this.http.get(API_ENFANT_URL);
   }
 
+  deleteEnfant(id) {
+    return this.http.delete(API_ENFANT_URL + id);
+  }
+
   getMyEnfants(parentID?: number) {
     if (parentID) {
       return this.http.get(API_ENFANT_URL + 'parent/' + parentID);
