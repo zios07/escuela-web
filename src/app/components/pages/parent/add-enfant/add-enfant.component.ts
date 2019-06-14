@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Account } from 'src/app/models/Account';
-import { Role } from 'src/app/models/Role';
-import { User } from '../../../../models/User';
-import { AuthenticationService } from '../../../../services/authentication.service';
-import { TokenService } from '../../../../services/token.service';
 import { EnfantService } from 'src/app/services/enfant.service';
+import { User } from '../../../../models/User';
 
 @Component({
   selector: 'app-add-enfant',
   templateUrl: './add-enfant.component.html',
-  styleUrls: ['./add-enfant.component.css']
+  styleUrls: ['./add-enfant.component.scss']
 })
 export class AddEnfantComponent implements OnInit {
 
