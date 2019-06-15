@@ -31,6 +31,8 @@ import { ProfilComponent } from './components/pages/eleve/profil/profil.componen
 import { ParametresComponent } from './components/pages/eleve/parametres/parametres.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewCourseComponent } from './components/pages/eleve/view-course/view-course.component';
+import { CoursFormComponent } from './components/pages/eleve/cours-form/cours-form.component';
+import { CoursListComponent } from './components/pages/eleve/cours-list/cours-list.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ViewCourseComponent } from './components/pages/eleve/view-course/view-c
     TextCourseComponent,
     ProfilComponent,
     ParametresComponent,
-    ViewCourseComponent
+    ViewCourseComponent,
+    CoursFormComponent,
+    CoursListComponent
   ],
   imports: [
     BrowserModule,

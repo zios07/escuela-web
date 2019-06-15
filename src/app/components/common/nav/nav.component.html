@@ -6,7 +6,7 @@
     </a>
 
     <!-- Eleve menu -->
-    <button mat-icon-button class="nav-item" routerLink="cours" *ngIf="connectedRole === 'ELEVE'">
+    <button mat-icon-button class="nav-item" routerLink="courses" *ngIf="connectedRole === 'ELEVE'">
       <span>Mes cours</span>
     </button>
     <button mat-icon-button class="nav-item" routerLink="activities" *ngIf="connectedRole === 'ELEVE'">
@@ -39,6 +39,23 @@
       </a>
     </mat-menu>
 
+
+    <!-- ADMIN menu -->
+    <button mat-icon-button class="nav-item" [matMenuTriggerFor]="courses" *ngIf="connectedRole === 'ADMIN'">
+      <span>Gestion des cours</span>
+    </button>
+
+    <!-- submenu enfants -->
+    <mat-menu #courses="matMenu">
+      <a mat-menu-item routerLink="course/all">
+        <mat-icon>list</mat-icon>
+        <span>Liste des cours</span>
+      </a>
+      <a mat-menu-item routerLink="course/form">
+        <mat-icon>add</mat-icon>
+        <span>Ajouter un cours</span>
+      </a>
+    </mat-menu>
 
     <span class="fill-remaining-space"></span>
     <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.account.username}}</b></span>

@@ -1,0 +1,49 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center">
+
+  <mat-card elevation="5" fxFlex>
+
+    <mat-card-title>
+      <h2 align="center">{{ title }}</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+      <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #coursForm="ngForm">
+        <mat-grid-list cols="3" rowHeight="100px">
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Nom" formControlName="nom">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Description" formControlName="description">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Niveau" formControlName="niveau">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="prix" formControlName="prix">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="mode === 'EDIT'">
+            <mat-form-field>
+              <input matInput placeholder="Nombre visiteurs" formControlName="nbVisiteurs">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button type="submit" [disabled]="!coursForm.form.valid" mat-raised-button color="primary">Enregistrer
+              cours</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <br>
+
+      <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+      <br>
+    </mat-card-content>
+  </mat-card>
+</div>

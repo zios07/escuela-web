@@ -32,7 +32,7 @@ export class CoursesComponent implements OnInit {
   }
 
   viewCourse(course) {
-    this.router.navigate(['/cours/', course.id]);
+    this.router.navigate(['/course/', course.id]);
   }
 
 }

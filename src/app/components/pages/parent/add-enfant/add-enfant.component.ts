@@ -45,7 +45,6 @@ export class AddEnfantComponent implements OnInit {
       firstName: ['', Validators.compose([Validators.required])],
       lastName: ['', Validators.compose([Validators.required])],
       email: [null],
-      role: [null],
       bDate: ['', Validators.compose([Validators.required])],
       gender: ['']
     });

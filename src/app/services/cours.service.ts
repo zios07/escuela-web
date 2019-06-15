@@ -19,8 +19,12 @@ export class CoursService {
     return this.http.put(API_COURS_URL, course);
   }
 
-  getCourses(page, size) {
+  getCourses(page?, size?) {
     return this.http.get(API_COURS_URL + '?page=' + page + '&size=' + size);
+  }
+
+  getAllCourses() {
+    return this.http.get(API_COURS_URL + '/all');
   }
 
   searchCourses(page, size, keyword) {
@@ -31,8 +35,12 @@ export class CoursService {
     return this.http.delete(API_COURS_URL + '/' + id);
   }
 
-  save(course) {
-    return this.http.post(API_COURS_URL, course);
+  save(course, mode) {
+    if (mode === 'EDIT') {
+      return this.http.put(API_COURS_URL, course);
+    } else {
+      return this.http.post(API_COURS_URL, course);
+    }
   }
 
   findById(id) {

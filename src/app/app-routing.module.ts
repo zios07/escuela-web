@@ -16,6 +16,8 @@ import { ProfilComponent } from './components/pages/eleve/profil/profil.componen
 import { ParametresComponent } from './components/pages/eleve/parametres/parametres.component';
 import { ContactComponent } from './components/pages/shared/contact/contact.component';
 import { ViewCourseComponent } from './components/pages/eleve/view-course/view-course.component';
+import { CoursFormComponent } from './components/pages/eleve/cours-form/cours-form.component';
+import { CoursListComponent } from './components/pages/eleve/cours-list/cours-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,10 +31,11 @@ const routes: Routes = [
   { path: 'recompenses', component: RecompensesComponent },
   { path: 'profil', component: ProfilComponent },
   { path: 'parametres', component: ParametresComponent },
-  { path: 'cours', component: CoursesComponent },
-  { path: 'cours/:id', component: ViewCourseComponent },
-  { path: 'cours/video', component: EnfantsComponent },
-  { path: 'cours/text', component: EnfantsComponent },
+  { path: 'courses', component: CoursesComponent },
+  { path: 'course/all', component: CoursListComponent },
+  { path: 'course/form', component: CoursFormComponent },
+  { path: 'course/form/:id', component: CoursFormComponent },
+  { path: 'course/:id', component: ViewCourseComponent },
   { path: 'test', component: EnfantsComponent },
   { path: 'enfants', component: EnfantsComponent },
   { path: 'enfants/form', component: AddEnfantComponent },
