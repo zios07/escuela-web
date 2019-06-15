@@ -18,7 +18,7 @@ export class EnfantsComponent implements OnInit {
   columns = [
     { columnDef: 'firstName', header: 'First Name', cell: (row: User) => `${row.firstName}` },
     { columnDef: 'lastName', header: 'Last Name', cell: (row: User) => `${row.lastName}` },
-    { columnDef: 'email', header: 'Email', cell: (row: User) => `${row.email}` },
+    { columnDef: 'gender', header: 'Sexe', cell: (row: User) => `${row.gender}` },
     { columnDef: 'username', header: 'Username', cell: (row: User) => `${row.account.username}` },
   ];
 

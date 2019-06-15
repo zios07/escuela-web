@@ -30,6 +30,7 @@ import { TextCourseComponent } from './components/pages/eleve/text-course/text-c
 import { ProfilComponent } from './components/pages/eleve/profil/profil.component';
 import { ParametresComponent } from './components/pages/eleve/parametres/parametres.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ViewCourseComponent } from './components/pages/eleve/view-course/view-course.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     VideoCourseComponent,
     TextCourseComponent,
     ProfilComponent,
-    ParametresComponent
+    ParametresComponent,
+    ViewCourseComponent
   ],
   imports: [
     BrowserModule,

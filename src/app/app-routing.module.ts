@@ -15,6 +15,7 @@ import { RecompensesComponent } from './components/pages/eleve/recompenses/recom
 import { ProfilComponent } from './components/pages/eleve/profil/profil.component';
 import { ParametresComponent } from './components/pages/eleve/parametres/parametres.component';
 import { ContactComponent } from './components/pages/shared/contact/contact.component';
+import { ViewCourseComponent } from './components/pages/eleve/view-course/view-course.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent },
   { path: 'parametres', component: ParametresComponent },
   { path: 'cours', component: CoursesComponent },
+  { path: 'cours/:id', component: ViewCourseComponent },
   { path: 'cours/video', component: EnfantsComponent },
   { path: 'cours/text', component: EnfantsComponent },
   { path: 'test', component: EnfantsComponent },

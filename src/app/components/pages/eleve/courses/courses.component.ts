@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CoursService } from 'src/app/services/cours.service';
+import { PanierService } from 'src/app/services/panier.service';
 
 @Component({
   selector: 'app-courses',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor() { }
+  courses: [];
+  totalPrice = 0;
+
+  constructor(private courseService: CoursService, private router: Router, private auth: AuthenticationService, private panierService: PanierService) { }
 
   ngOnInit() {
+    this.loadCourses();
+  }
+
+  loadCourses() {
+    this.auth.getConnectedUser().then(resp => {
+      const connectedUser = resp;
+      if (connectedUser.parent && connectedUser.parent.panier && connectedUser.parent.panier.courses) {
+        this.courses = connectedUser.parent.panier.courses;
+      } else {
+        this.courses = [];
+      }
+    });
+  }
+
+  viewCourse(course) {
+    this.router.navigate(['/cours/', course.id]);
   }
 
 }

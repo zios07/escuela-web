@@ -10,6 +10,7 @@ export class User {
     account: Account;
     role: Role;
     bDate: Date;
+    gender: string;
 
     constructor(id?: number, firstName?: string, lastName?: string, email?: string, account?: Account, role?: Role, bDate?: Date) {
 
