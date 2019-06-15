@@ -22,6 +22,7 @@ export class AddEnfantComponent implements OnInit {
   submitted = false;
   user: User = new User();
   password;
+  username;
   mode = 'ADD';
 
   returnUrl: string;
@@ -58,6 +59,9 @@ export class AddEnfantComponent implements OnInit {
     if (!this.form.value.password) {
       enfant.account.password = this.password;
     }
+    if (this.mode === 'EDIT') {
+      enfant.account.username = this.username;
+    }
     this.enfantService.addEnfant(enfant, this.mode).delay(1000).subscribe(resp => {
       this.toastr.success('Enfant enregistré avec succès');
       this.submitted = false;
@@ -93,6 +97,7 @@ export class AddEnfantComponent implements OnInit {
       this.form.get('bDate').setValue(enfant.bDate);
       this.form.get('gender').setValue(enfant.gender);
       this.password = enfant.account.password;
+      this.username = enfant.account.username;
     }
   }
 
